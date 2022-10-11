@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,11 @@ class PedidoController {
 
 	private PedidoRepository repo;
 
+	private static final Logger LOG = LoggerFactory.getLogger(PedidoController.class);
+
 	@GetMapping("/pedidos")
 	List<PedidoDto> lista() {
+		LOG.info("buscar todos os pedidos");
 		return repo.findAll()
 				.stream()
 				.map(PedidoDto::new)
